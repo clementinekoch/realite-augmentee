@@ -24,8 +24,12 @@
 
         <!-- Cible de reconnaissance -->
         <a-entity mindar-image-target="targetIndex: 0">
-            <!-- Affichage de la vidéo en format A4 -->
-            <a-plane id="videoPlane" material="shader: flat; src: #video" position="0 0 0" width="0.7" height="1">
+            <!-- Affichage de la vidéo au bon ratio A4 -->
+            <a-plane id="videoPlane" 
+                material="shader: flat; src: #video" 
+                position="0 0 0" 
+                width="1" 
+                height="1.414">
             </a-plane>
         </a-entity>
     </a-scene>
