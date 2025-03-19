@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mindar-js@1.2.2/dist/mindar-image-three.prod.js"></script>
     <style>
         body { margin: 0; overflow: hidden; }
-        video { position: absolute; width: 100%; height: auto; display: none; }
+        video { position: absolute; width: 100%; height: auto; }
     </style>
 </head>
 <body>
@@ -18,6 +18,22 @@
             const mindarThree = new window.MINDAR.Three.ImageTracker({
                 container: document.body,
                 imageTargetSrc: "targets.mind"
+            });
+
+            // Démarre le tracker après la création
+            await mindarThree.start();
+
+            // Affiche la vidéo quand la réalité augmentée est activée
+            const video = document.getElementById("video");
+            video.style.display = "block"; // Rend la vidéo visible
+
+            // Ajoute un évènement pour gérer les interactions si nécessaire
+            mindarThree.addEventListener('found', () => {
+                video.play();  // Lance la vidéo lorsqu'un élément est trouvé
+            });
+
+            mindarThree.addEventListener('lost', () => {
+                video.pause(); // Pause la vidéo lorsque l'élément est perdu
             });
         });
     </script>
