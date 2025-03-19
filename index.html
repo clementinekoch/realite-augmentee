@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
+    <title>Réalité Augmentée</title>
     <script src="https://cdn.jsdelivr.net/npm/mindar-js@1.2.2/dist/mindar-image-three.prod.js"></script>
     <style>
         body { margin: 0; overflow: hidden; }
@@ -12,35 +12,12 @@
 </head>
 <body>
     <video id="video" src="animation.mp4" loop playsinline></video>
+    
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
-            const mindarThree = new MindAR.Three.ImageTracker({
+            const mindarThree = new window.MINDAR.Three.ImageTracker({
                 container: document.body,
                 imageTargetSrc: "targets.mind"
-            });
-
-            const { renderer, scene, camera } = mindarThree;
-            const anchor = mindarThree.addAnchor(0);
-            const video = document.getElementById("video");
-            const videoTexture = new THREE.VideoTexture(video);
-            
-            const geometry = new THREE.PlaneGeometry(1, 0.5);
-            const material = new THREE.MeshBasicMaterial({ map: videoTexture, transparent: true });
-            const plane = new THREE.Mesh(geometry, material);
-            anchor.group.add(plane);
-
-            anchor.onTargetFound = () => {
-                video.play();
-            };
-
-            anchor.onTargetLost = () => {
-                video.pause();
-                video.currentTime = 0;
-            };
-
-            await mindarThree.start();
-            renderer.setAnimationLoop(() => {
-                renderer.render(scene, camera);
             });
         });
     </script>
