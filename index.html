@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réalité Augmentée</title>
     <script src="https://cdn.jsdelivr.net/npm/mindar-js@1.2.2/dist/mindar-image-three.prod.js"></script>
-    <style>
-        body { margin: 0; overflow: hidden; }
-        video { position: absolute; width: 100%; height: auto; }
-    </style>
 </head>
 <body>
     <video id="video" src="animation.mp4" loop playsinline></video>
@@ -20,20 +16,20 @@
                 imageTargetSrc: "targets.mind"
             });
 
-            // Démarre le tracker après la création
+            // Démarre Mindar
             await mindarThree.start();
 
-            // Affiche la vidéo quand la réalité augmentée est activée
             const video = document.getElementById("video");
-            video.style.display = "block"; // Rend la vidéo visible
+            video.style.display = "block"; // Affiche la vidéo
 
-            // Ajoute un évènement pour gérer les interactions si nécessaire
+            // Joue la vidéo lorsqu'une cible est trouvée
             mindarThree.addEventListener('found', () => {
-                video.play();  // Lance la vidéo lorsqu'un élément est trouvé
+                video.play();
             });
 
+            // Met en pause la vidéo lorsque la cible est perdue
             mindarThree.addEventListener('lost', () => {
-                video.pause(); // Pause la vidéo lorsque l'élément est perdu
+                video.pause();
             });
         });
     </script>
